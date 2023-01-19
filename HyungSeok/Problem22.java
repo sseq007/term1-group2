@@ -3,7 +3,7 @@ package coding_test;
 import java.util.*;
 import java.io.*;
 
-public class Problem 22 {
+public class Problem22 {
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
