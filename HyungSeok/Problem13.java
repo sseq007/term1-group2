@@ -3,7 +3,7 @@ package coding_test;
 import java.util.*;
 import java.io.*;
 
-public class Problem 13 {
+public class Problem13 {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub

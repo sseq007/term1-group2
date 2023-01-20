@@ -3,7 +3,7 @@ package coding_test;
 import java.util.*;
 import java.io.*;
 
-public class Problem 11 {
+public class Problem11 {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
