@@ -49,21 +49,21 @@ public class BOJ17276 {
     }
 
     static int[][] rotateRight(int[][] arr, int n) {
-        int[][] tmp = arr.clone();
+        int[][] tmp = createArr(arr, n);
 
-        //첫 대각선
+        //첫 대각선 -> 수직선
         for (int j = 0; j < n; j++) {
             tmp[j][n / 2] = arr[j][j];
         }
-        //가운데 수직
+        //수직선 -> 부대각선
         for (int j = 0; j < n; j++) {
             tmp[j][n-j-1] = arr[j][n / 2];
         }
-        //부대각선
+        //부대각선 -> 수평선
         for (int j = 0; j < n; j++) {
             tmp[n / 2][j] = arr[n-j-1][j];
         }
-        //수평선
+        //수평선 -> 첫 대각선
         for (int j = 0; j < n; j++) {
             tmp[j][j] = arr[n / 2][j];
         }
@@ -71,7 +71,7 @@ public class BOJ17276 {
     }
 
     static int[][] rotateLeft(int[][] arr, int n) {
-        int[][] tmp = arr.clone();
+        int[][] tmp = createArr(arr, n);
 
         //첫 대각선 -> 수평선
         for (int j = 0; j < n; j++) {
@@ -92,5 +92,17 @@ public class BOJ17276 {
         return tmp;
     }
 
-    static int stoi(String s) {return Integer.parseInt(s);}
+    static int[][] createArr(int[][] arr, int n) {
+        int[][] ret = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                ret[i][j] = arr[i][j];
+            }
+        }
+
+        return ret;
+    }
+    static int stoi(String s) {
+        return Integer.parseInt(s);}
 }
