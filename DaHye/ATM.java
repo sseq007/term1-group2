@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ATML {
+public class ATM {
 	// 정렬 후 차례로 더하기
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
