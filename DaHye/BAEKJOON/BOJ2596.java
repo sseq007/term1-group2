@@ -1,8 +1,9 @@
+package BAEKJOON;
 	
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class 비밀편지 {
+public class BOJ2596 {
     
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -1,8 +1,9 @@
+package BAEKJOON;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class 블랙잭 {
+public class BOJ2897 {
 	// 카드의 합이 21을 넘지 않는 한도 내에서 합을 최대한 크게 만들기
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

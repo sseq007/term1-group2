@@ -1,6 +1,7 @@
+package BAEKJOON;
 import java.util.Scanner;
 
-public class 직사각형을만드는방법 {
+public class BOJ8320 {
 
 	public static void main(String[] args) {
 		// n = 6일 때

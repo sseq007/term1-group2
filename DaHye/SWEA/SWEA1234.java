@@ -1,9 +1,10 @@
+package SWEA;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class 비밀번호 {
+public class SWEA1234 {
 	// SWEA: 1234
 	public static void main(String[] args) throws Exception {
 //		System.setIn(new FileInputStream("./Dahye/Input/비밀번호_input.txt"));
