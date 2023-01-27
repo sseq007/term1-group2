@@ -12,7 +12,7 @@ C연산 : 배열의 모든 열에 대해서 정렬 수행 IF 열의 개수 > 행
 정렬 조건 (공통)
 1. 각각의 수가 몇번 나왔는지 찾는다.
 2. 빈도 수를 오름차순 정렬한다.
-    2-1. 빈도수가 같다면 수가 커지는 순으로 정렬한다.
+    2-1. 빈도수가 같다면 수가 커지는 순으로 정렬한다. => Comparator 사용
 3. 정렬된 결과를 다시 배열 A에 넣는다.
 4. 결과를 배열에 넣을 때 수 , 등장횟수를 모두 넣으며 수를 앞에 넣는다.
 EX) [3, 1, 1] => [3, 1, 1, 2] => [2, 1, 3, 1, 1, 2] => [3, 1, 2, 2, 1, 3] ...
@@ -26,10 +26,8 @@ EX) [3, 1, 1] => [3, 1, 1, 2] => [2, 1, 3, 1, 1, 2] => [3, 1, 2, 2, 1, 3] ...
 풀이 아이디어
 2차원 배열이지만 행, 열의 크기가 계속 동적으로 변하기 때문에 단순히 2차원 배열을 쓰기엔 어려워 보인다.
 => 가변 배열 사용
-=> 애초에 100 * 100 배열을 만들어서 편하게 조절
-C연산 시 해당 열에 대해서는 어떻게 처리할것인지?
-ArrayList를 쓴다면 굳이 0을 채울 필요가 없을 것 같다.
-콜렉션을 쓰면 TLE가 뜨지 않을지?
+=> 애초에 100을 넘어가지 않기 때문에 100 * 100 배열을 만들어서 편하게 조절
+C연산 시 해당 열에 대해서는 어떻게 처리할것인지? = 100*100 배열을 만들면해결
 
 흐름
 연산 -> 배열 처리 -> A[r][c] 수 검사
@@ -53,8 +51,8 @@ public class BOJ17140 {
     public static void main(String[] args) throws IOException {
         //초기화
         st = new StringTokenizer(br.readLine());
-        int r = stoi(st.nextToken());
-        int c = stoi(st.nextToken());
+        int r = stoi(st.nextToken()) - 1;
+        int c = stoi(st.nextToken()) - 1;
         int k = stoi(st.nextToken());
 
         for (int i = 0; i < 3; i++) {
@@ -72,18 +70,18 @@ public class BOJ17140 {
         int maxCol = 3;
         while (minute <= 100) {
             //정답확인
-            if (map[r - 1][c - 1] == k) break;
+            if (map[r][c] == k) break;
 
             //행과 열 사이즈 비교
             if (maxRow >= maxCol) {
                 //R연산
-                for (int i = 0; i < maxCol; i++) {
+                for (int i = 0; i < maxRow; i++) {
                     rowLens[i] = calculateR(i);
                     maxCol = Math.max(rowLens[i], maxCol);
                 }
             } else {
                 //C연산
-                for (int i = 0; i < maxRow; i++) {
+                for (int i = 0; i < maxCol; i++) {
                     colRens[i] = calculateC(i);
                     maxRow = Math.max(maxRow, colRens[i]);
                 }
@@ -92,9 +90,6 @@ public class BOJ17140 {
         }
 
         //정답출력
-        for(int[] arr : map) {
-            System.out.println(Arrays.toString(arr));
-        }
         System.out.println(minute == 101 ? -1 : minute);
     }
 
@@ -103,7 +98,7 @@ public class BOJ17140 {
     static int calculateR(int idx) {
         //빈도 수를 구한다.
         Map<Integer, Integer> m = new HashMap<>();
-        for (int i = 0; i < rowLens[idx]; i++) {
+        for (int i = 0; i < 100; i++) {
             if (map[idx][i] == 0) continue;
             m.put(map[idx][i], m.getOrDefault(map[idx][i], 0) + 1);
         }
@@ -136,14 +131,13 @@ public class BOJ17140 {
         for (int i = curIdx; i < 100; i++) {
             map[idx][i] = 0;
         }
-        rowLens[idx] = curLen;
         return curLen;
     }
 
     static int calculateC(int idx) {
         //빈도 수를 구한다.
         Map<Integer, Integer> m = new HashMap<>();
-        for (int i = 0; i < rowLens[idx]; i++) {
+        for (int i = 0; i < 100; i++) {
             if (map[i][idx] == 0) continue;
             m.put(map[i][idx], m.getOrDefault(map[i][idx], 0) + 1);
         }
@@ -176,7 +170,6 @@ public class BOJ17140 {
             map[i][idx] = 0;
         }
 
-        colRens[idx] = curLen;
         return curLen;
     }
 }
