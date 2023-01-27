@@ -1,7 +1,8 @@
+package BAEKJOON;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ATM {
+public class BOJ11399 {
 	// 정렬 후 차례로 더하기
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

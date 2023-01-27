@@ -1,8 +1,9 @@
+package BAEKJOON;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class 영식이와친구들 {
+public class BOJ1592 {
 	// 백준: 1592
 	// 1부터 N까지 적혀있는 원형 자리
 	// 1번 사람 시작 => 한 사람이 공을 M번 받으면 끝
