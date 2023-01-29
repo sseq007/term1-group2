@@ -12,7 +12,7 @@ class Audience {
     int end;
 
     public Audience(int start, int end) {
-        this.start = start;
+
         this.end = end;
     }
 }
