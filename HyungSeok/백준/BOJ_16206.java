@@ -78,6 +78,7 @@ public class BOJ_16206 {
                 }
                 else if (tmp[i] == 10) { // 해당 케이크는 자를 필요 없음
                     cake++;
+                    tmp[i] -= 10;
                     break;
                 }
                 else if (tmp[i] < 10) { // 이 케이크는 이제 못 자르는 케이크
