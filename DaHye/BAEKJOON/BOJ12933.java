@@ -70,11 +70,7 @@ public class BOJ12933 {
 				}
 			}
 			
-			if(qIdx < uIdx && uIdx < aIdx && aIdx < cIdx && cIdx < kIdx) {
-				flag = true;
-			}
-			
-			if(qIdx != -1 && uIdx != -1 && aIdx != -1 && cIdx != -1 && kIdx != -1 && flag == true) {
+			if(qIdx != -1 && uIdx != -1 && aIdx != -1 && cIdx != -1 && kIdx != -1) {
 				input.deleteCharAt(kIdx);
 				input.deleteCharAt(cIdx);
 				input.deleteCharAt(aIdx);
