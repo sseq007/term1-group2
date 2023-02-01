@@ -1,4 +1,5 @@
 package SWEA;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -37,8 +38,7 @@ public class SWEA4615 {
 						arr[i][j] = 1;
 				}
 			}
-			
-			
+
 			for (int i = 0; i < M; i++) {
 				st = new StringTokenizer(br.readLine());
 				int r = Integer.parseInt(st.nextToken());
@@ -52,21 +52,22 @@ public class SWEA4615 {
 					arr[r - 1][c - 1] = 2;
 				// 돌을 놓고, 남은 공간 수 1 줄이기
 				leftSpace--;
-//				for (int j = 0; j < arr.length; j++) {
-//					for (int j2 = 0; j2 < arr.length; j2++) {
-//						System.out.print(arr[j][j2] + " ");
-//					}
-//					System.out.println("");
-//				}
-//				System.out.println("-----------");
+				for (int j = 0; j < arr.length; j++) {
+					for (int j2 = 0; j2 < arr.length; j2++) {
+						System.out.print(arr[j][j2] + " ");
+					}
+					System.out.println("");
+				}
+				System.out.println("-----------");
 				
+				for (int k = 2; k <= arr.length - 1; k++) {
 
-				for (int k = arr.length - 1; k > 0; k--) {
-//					int dir = 0;
-					// 팔방 탐색
 					boolean flag = false;
+					boolean flag2 = false;
+					boolean flag3 = false;
 					for (int j = 0; j < 8; j++) {
-
+//						int dir = 0;
+						// 팔방 탐색
 
 						int tmpR = r - 1;
 						int tmpC = c - 1;
@@ -76,19 +77,25 @@ public class SWEA4615 {
 						if (tmpR >= 0 && tmpR < arr.length && tmpC >= 0 && tmpC < arr.length) {
 
 							if (arr[tmpR][tmpC] == arr[r - 1][c - 1]) {
-//								System.out.println(arr[tmpR][tmpC]);
-								for (int l = k; l > 0; l--) {
-									if(arr[r - 1 + l * dr[j]][c - 1 + l * dc[j]] != arr[tmpR][tmpC]) {
-										if(arr[r - 1 + l * dr[j]][c - 1 + l * dc[j]] != 0) {
+								flag = true;
+								for (int l = k-1; l > 0; l--) {
+									if (arr[r - 1 + l * dr[j]][c - 1 + l * dc[j]] != arr[tmpR][tmpC]) {
+										if (arr[r - 1 + l * dr[j]][c - 1 + l * dc[j]] != 0) {
 											arr[r - 1 + l * dr[j]][c - 1 + l * dc[j]] = arr[tmpR][tmpC];
 										}
 									}
 								}
 							}
-						}
-					}
 
+						}
+
+					}
+					if (flag == true) {
+						flag2 = true;
+						break;
+					}
 				}
+
 			}
 
 			int countB = 0;
@@ -99,7 +106,8 @@ public class SWEA4615 {
 //					System.out.print(arr[i][j]);
 					if (arr[i][j] == 1)
 						countB++;
-					else if (arr[i][j] == 2) countW++;
+					else if (arr[i][j] == 2)
+						countW++;
 				}
 //				System.out.println();
 			}
