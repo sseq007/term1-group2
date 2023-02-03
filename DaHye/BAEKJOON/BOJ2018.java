@@ -1,3 +1,4 @@
+package BAEKJOON;
 import java.util.Scanner;
 
 public class BOJ2018 {
