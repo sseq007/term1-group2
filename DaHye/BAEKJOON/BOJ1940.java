@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class BOJ1940 {
+	/*
+	 주몽
+	 */
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -34,7 +37,6 @@ public class BOJ1940 {
 				startIdx++;
 				count++;
 			}
-			if(endIdx == arr.length - 1 && startIdx == arr.length - 2) break;
 		}
 		System.out.println(count);
 	}
