@@ -11,7 +11,6 @@ public class BOJ17136 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     static StringTokenizer st;
-    static int ans = -1;
     static int paperCnt = 0;
     static int[] paperBox = new int[6];
     static int min = 0x7fffffff;
@@ -25,9 +24,16 @@ public class BOJ17136 {
                 if (map[i][j] == 1) paperCnt++;
             }
         }
+        
+        //색종이 채우기
+        for (int i = 1; i <= 5; i++) {
+            paperBox[i] = 5;
+        }
 
         //로직
-        backtacking(0, 0, 0, paperCnt);
+        backtacking(0 , paperCnt);
+
+        System.out.println(min);
     }
 
     static int stoi(String s) {return Integer.parseInt(s);}
@@ -37,19 +43,26 @@ public class BOJ17136 {
     @param startX, startY 시작 할 좌표
     @param paperCnt 붙여야할 종이 개수
      */
-    static void backtacking(int cnt, int startX, int startY, int paperCnt) {
-        if (paperCnt == 0) {
+    static void backtacking(int cnt, int paperCnt) {
+        if (paperCnt <= 0) {
             min = Math.min(min, cnt);
             return;
         }
 
         //현재 위치에서 그린다.
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 5; i > 0; i--) {
+            //마지막 1x1 색종이까지 다붙였는데 남은 경우 되돌아간다.
             if (paperBox[1] == 0 && paperCnt > 0) return;
-            for (int j = startX; j < N; j++) {
-                for (int k = startY; k < N; k++) {
-                    if (attach(i)) {
-                        backtacking(cnt + 1, );
+            if (i * i > paperCnt) continue;
+            for (int j = 0; j < N; j++) {
+                for (int k = 0; k < N; k++) {
+                    if (map[j][k] != 1) continue;
+                    if (check(i, j, k)) {
+                        attach(i, j, k);
+                        paperBox[i]--;
+                        backtacking(cnt + 1, paperCnt - i * i);
+                        remove(i, j, k);
+                        paperBox[i]++;
                     }
                 }
             }
@@ -59,11 +72,30 @@ public class BOJ17136 {
     /*
 
      */
-    static boolean attach(int n) {
-        return false;
+    static boolean check(int n, int x, int y) {
+
+        for (int i = x; i < x + n; i++) {
+            for (int j = y; j < y + n; j++) {
+                if (i < 0 || i >= N || j < 0 || j >= N) return false;
+                if (map[i][j] != 1) return false;
+            }
+        }
+        return true;
     }
 
-    static void remove(int n) {
+    static void attach(int n, int x, int y) {
+        for (int i = x; i < x + n; i++) {
+            for (int j = y; j < y + n; j++) {
+                map[i][j] = 2;
+            }
+        }
+    }
 
+    static void remove(int n, int x, int y) {
+        for (int i = x; i < x + n; i++) {
+            for (int j = y; j < y + n; j++) {
+                map[i][j] = 1;
+            }
+        }
     }
 }
