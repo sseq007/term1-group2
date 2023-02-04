@@ -49,29 +49,20 @@ public class BOJ14888 {
 
         for (int i = 0; i < 4; i++) {
             if (operator[i] > 0){
+                operator[i]--;
                 if (i == 0) {
-                    operator[i]--;
                     recur(sum + nums[depth + 1], depth + 1);
-                    operator[i]++;
-                    continue;
                 }
                 if (i == 1) {
-                    operator[i]--;
                     recur(sum - nums[depth + 1], depth + 1);
-                    operator[i]++;
-                    continue;
                 }
                 if (i == 2) {
-                    operator[i]--;
                     recur(sum * nums[depth + 1], depth + 1);
-                    operator[i]++;
-                    continue;
                 }
                 if (i == 3) {
-                    operator[i]--;
                     recur(sum / nums[depth + 1], depth + 1);
-                    operator[i]++;
                 }
+                operator[i]++;
             }
         }
     }
