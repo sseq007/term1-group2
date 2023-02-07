@@ -24,12 +24,9 @@ public class BOJ14712 {
 		System.out.println(count);
 	}
 
-	static int m = -1;
-
 	public static void func(int k) {
-
+		// 사각형이 있는지 확인하기 위한 변수
 		boolean flag = false;
-
 		if (k == arr.length) {
 			for (int i = 0; i < M * N - N - 1; i++) {
 				if((i + 1) % N == 0) {
@@ -41,7 +38,6 @@ public class BOJ14712 {
 				}
 			}
 			if (flag == false) count++;
-
 			return;
 		}
 		
