@@ -33,7 +33,7 @@ public class BOJ14712 {
 		if (k == arr.length) {
 			for (int i = 0; i < M * N - N - 1; i++) {
 				if((i + 1) % N == 0) {
-					continue;
+					continue; 
 				}
 				if ((arr[i] == 1) && (arr[i + 1] == 1) && (arr[i + N] == 1) && (arr[i + N + 1] == 1)) {
 					flag = true;
@@ -44,6 +44,7 @@ public class BOJ14712 {
 
 			return;
 		}
+		
 		for (int i = 0; i < square.length; i++) {
 			arr[k] = i;
 			func(k + 1);
