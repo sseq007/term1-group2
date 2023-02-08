@@ -27,6 +27,8 @@ public class BOJ14712 {
 	public static void func(int k) {
 		// 사각형이 있는지 확인하기 위한 변수
 		boolean flag = false;
+		
+		// basis part
 		if (k == arr.length) {
 			for (int i = 0; i < M * N - N - 1; i++) {
 				if((i + 1) % N == 0) {
@@ -41,6 +43,7 @@ public class BOJ14712 {
 			return;
 		}
 		
+		// inductive part
 		for (int i = 0; i < square.length; i++) {
 			arr[k] = i;
 			func(k + 1);
