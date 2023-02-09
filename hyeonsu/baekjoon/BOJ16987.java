@@ -44,7 +44,7 @@ public class BOJ16987 {
         }
 
         //로직
-        solve(0, 0);
+        solve(0);
 
         //정답 출력
         System.out.println(max);
@@ -52,29 +52,29 @@ public class BOJ16987 {
 
     static int stoi(String s) {return Integer.parseInt(s);}
 
-    static void solve(int cnt, int idx) {
-        if (idx == n - 1) {
+    static void solve(int idx) {
+        if (idx == n) {
+            int cnt = 0;
+            for (boolean b : isBroken) {
+                if (b) cnt++;
+            }
             max = Math.max(max, cnt);
             return;
         }
 
-        //깰 수 있는 계란 순회
-        boolean isAllBroken = true;
+        boolean canStrike = false;
 
-        for (int i = 0; i < n; i++) {
-            //현재 손에 든 계란이 깨졌으면 오른쪽 계란으로 옮긴다.
-            if (i == idx){
-                if (isBroken[i]) {
-                    solve(cnt, idx + 1);
-                    break;
+        // 현재 손에 든 계란이 깨지지 않았는가?
+        if (!isBroken[idx]) {
+            // 현재 든 계란 외에 깨지지 않은 계란 순회
+            for (int i = 0; i < n; i++) {
+                if (i == idx){
+                    continue;
                 }
-                continue;
-            }
-            if (isBroken[i]) continue;
-            if (!isBroken[i]) isAllBroken = false;
+                //계란이 깨졌다면 다음 계란으로
+                if (isBroken[i]) continue;
+                canStrike = true;
 
-            //본인의 계란이 깨지지 않는가? : 손에 든 계란으로 내려쳤을 때 본인의 내구도가 0 초과인가?
-            if (eggs[idx].dura - eggs[i].weight > 0) {
                 //계란을 친다.
                 eggs[idx].dura -= eggs[i].weight;
                 eggs[i].dura -= eggs[idx].weight;
@@ -82,16 +82,25 @@ public class BOJ16987 {
                 if (eggs[i].dura <= 0) {
                     isBroken[i] = true;
                 }
-                solve(cnt + 1, idx);
+                if (eggs[idx].dura <= 0) {
+                    isBroken[idx] = true;
+                }
+                solve(idx + 1);
                 //다시 원상복구
+                if (eggs[i].dura <= 0) {
+                    isBroken[i] = false;
+                }
+                if (eggs[idx].dura <= 0) {
+                    isBroken[idx] = false;
+                }
                 eggs[idx].dura += eggs[i].weight;
                 eggs[i].dura += eggs[idx].weight;
-                isBroken[i] = false;
+
             }
         }
 
-        //깨지지 않은 계란이 하나도 남아있지 않다면 바로 오른쪽으로 넘어간다.
-        if (isAllBroken) solve(cnt, idx + 1);
+        // 손에 든 계란이 깨졌거나 모든 계란이 깨져있는 경우 다음 오른쪽 계란으로 넘어간다.
+        if (!canStrike) solve(idx + 1);
 
     }
 
