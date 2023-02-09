@@ -1,95 +1,87 @@
-package coding_test.백준;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
 // 백준 16987 : 계란으로 계란치기
 public class BOJ_16987 {
-    static int answer = Integer.MIN_VALUE;
+	static int answer = 0;
 
-    static int[] arr;
+	static Egg[] eggs;
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+	static int N;
 
-        int N = Integer.parseInt(bf.readLine());
+	public static void main(String[] args) throws Exception {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-//        arr = new int[N];
-        Egg[] eggs = new Egg[N];
+		N = Integer.parseInt(bf.readLine());
 
-        for (int i = 0; i < N; i++) {
-            String dw = bf.readLine();
-            String[] dw_arr = dw.split(" ");
+		eggs = new Egg[N];
 
-            eggs[i] = new Egg(Integer.parseInt(dw_arr[0]), Integer.parseInt(dw_arr[1]));
-        }
+		for (int i = 0; i < N; i++) {
+			String dw = bf.readLine();
+			String[] dw_arr = dw.split(" ");
 
-        recursive(eggs, new int[N], new boolean[N], 1);
+			eggs[i] = new Egg(Integer.parseInt(dw_arr[0]), Integer.parseInt(dw_arr[1]));
+		}
 
-        System.out.println(answer);
-    }
+		recursive(new int[N], 0);
 
-    private static void recursive(Egg[] eggs, int[] order, boolean[] visited, int idx) {
+		System.out.println(answer);
+	}
 
-        order[0] = 0;
+	private static void recursive(int[] order, int idx) {
+		if (idx == order.length) {
+			solve(new Egg[N], order);
 
-        // basis
-        if (idx == order.length) {
-            System.out.println(Arrays.toString(order));
-            solve(eggs, order);
-            return;
-        }
+			return;
+		}
 
-        for (int i = 1; i < order.length ; i++){
-            if (!visited[i]) {
-                visited[i] = true;
-                order[idx] = i;
-                recursive(eggs, order, visited, idx + 1);
-                visited[i] = false;
-            }
-        }
-    }
+		for (int i = 0; i < order.length; i++) {
+			if (idx != i) {
+				order[idx] = i;
+				recursive(order, idx + 1);
+			}
+		}
+	}
 
-    private static void solve(Egg[] eggs, int[] order) {
-        int idx = 0;
+	private static void solve(Egg[] sel_egg, int[] order) {
+		int[] sel_egg_s = new int[N];
+		int[] sel_egg_w = new int[N];
+		
+		// 계란 지정하기
+		for (int i = 0; i < N; i++) {
+			sel_egg_s[i] = eggs[i].s;
+			sel_egg_w[i] = eggs[i].w;
+		}
 
-        Egg put_egg;
+		for (int i = 0; i < N; i++) {
+			// 계란 때리기
+			if (sel_egg_s[i] > 0 && sel_egg_s[order[i]] > 0) {
+				int attack_1 = sel_egg_s[i] - sel_egg_w[order[i]];
+				int attack_2 = sel_egg_s[order[i]] - sel_egg_w[i];
 
-        for (int i = 1 ; i < order.length ; i++) {
-            put_egg = eggs[idx];
+				sel_egg_s[i] = attack_1;
+				sel_egg_s[order[i]] = attack_2;
+			}
+		}
 
-            if (put_egg.s > 0 && eggs[order[i]].s > 0) {
-                put_egg.s -= eggs[order[i]].w;
-                eggs[order[i]].s -= put_egg.w;
-            }
+		int cnt = 0;
 
-        }
+		for (int i = 0; i < order.length; i++) {
+			if (sel_egg_s[i] <= 0) // 깨졌다는 의미
+				cnt++;
+		}
 
-        int cnt = 0;
-
-        for (int i = 0 ; i < eggs.length ; i++) {
-            if (eggs[i].s <= 0)
-                cnt++;
-        }
-
-        answer = Math.max(answer, cnt);
-    }
+		answer = Math.max(answer, cnt);
+	}
 }
 
 class Egg {
-    int s;
-    int w;
+	int s;
+	int w;
 
-    Egg() {
-    }
-
-    Egg(int s, int w) {
-        this.s = s;
-        this.w = w;
-    }
-
-    public String toString() {
-        return this.s + " " + this.w;
-    }
+	Egg(int s, int w) {
+		this.s = s;
+		this.w = w;
+	}
 }
