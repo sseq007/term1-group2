@@ -1,5 +1,3 @@
-package coding_test.백준;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -8,7 +6,7 @@ public class BOJ_1074 {
     static int N;
     static int r;
     static int c;
-
+    
     static int cnt = 0;
 
     public static void main(String[] args) throws Exception {
@@ -23,37 +21,37 @@ public class BOJ_1074 {
 
         int size = (int)(Math.pow(2, N));
 
-        recursive(size);
+        recursive(size, 0, 0);
 
         System.out.println(cnt);
     }
 
-    private static void recursive(int size) {
+    private static void recursive(int size, int x, int y) {
         if (size == 1) {
             return;
         }
 
         // 1.
-        if (r < size/2 && c < size/2) {
-            recursive(size/2);
+        if (r < y + size/2 && c < x + size/2) {
+            recursive(size/2, x, y);
         }
 
         // 2.
-        else if (r < size/2 && c >= size/2) {
+        else if (r < y + size/2 && c >= x + size/2) {
             cnt += (size/2) * (size/2);
-            recursive(size/2);
+            recursive(size/2, x + size/2, y);
         }
 
         // 3.
-        else if (r >= size/2 && c < size/2) {
+        else if (r >= y + size/2 && c < x + size/2) {
             cnt += (size/2) * (size/2) * 2;
-            recursive(size/2);
+            recursive(size/2, x, y + size/2);
         }
 
         // 4.
         else {
             cnt += (size/2) * (size/2) * 3;
-            recursive(size/2);
+            recursive(size/2, x + size/2, y + size/2);
         }
     }
 }
