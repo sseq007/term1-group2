@@ -1,11 +1,19 @@
 package SWEA;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
+class Point {
+	int a;
+	int b;
+	Point(int a, int b){
+		this.a = a;
+		this.b = b;
+	}
+}
 public class SWEA4615 {
 
 	public static void main(String[] args) throws Exception {
@@ -52,48 +60,36 @@ public class SWEA4615 {
 					arr[r - 1][c - 1] = 2;
 				// 돌을 놓고, 남은 공간 수 1 줄이기
 				leftSpace--;
-				for (int j = 0; j < arr.length; j++) {
-					for (int j2 = 0; j2 < arr.length; j2++) {
-						System.out.print(arr[j][j2] + " ");
-					}
-					System.out.println("");
-				}
-				System.out.println("-----------");
-				
-				for (int k = 2; k <= arr.length - 1; k++) {
+//				for (int j = 0; j < arr.length; j++) {
+//					for (int j2 = 0; j2 < arr.length; j2++) {
+//						System.out.print(arr[j][j2] + " ");
+//					}
+//					System.out.println("");
+//				}
+//				System.out.println("-----------");
 
-					boolean flag = false;
-					boolean flag2 = false;
-					boolean flag3 = false;
-					for (int j = 0; j < 8; j++) {
-//						int dir = 0;
-						// 팔방 탐색
-
+				for (int j = 0; j < 8; j++) {
+					List<Integer> nX = new ArrayList<>();
+					List<Integer> nY = new ArrayList<>();
+					for (int k = 1; k < arr.length; k++) {
 						int tmpR = r - 1;
 						int tmpC = c - 1;
 						tmpR = tmpR + k * dr[j];
 						tmpC = tmpC + k * dc[j];
 
 						if (tmpR >= 0 && tmpR < arr.length && tmpC >= 0 && tmpC < arr.length) {
-
-							if (arr[tmpR][tmpC] == arr[r - 1][c - 1]) {
-								flag = true;
-								for (int l = k-1; l > 0; l--) {
-									if (arr[r - 1 + l * dr[j]][c - 1 + l * dc[j]] != arr[tmpR][tmpC]) {
-										if (arr[r - 1 + l * dr[j]][c - 1 + l * dc[j]] != 0) {
-											arr[r - 1 + l * dr[j]][c - 1 + l * dc[j]] = arr[tmpR][tmpC];
-										}
-									}
-								}
+							if(arr[tmpR][tmpC] == 0) break;
+							else if (arr[tmpR][tmpC] == col) {
+								for(int l = 0; l < nX.size(); l++) {
+									arr[nX.get(l)][nY.get(l)] = col;
+								} break;
+							} else {
+								nX.add(tmpR);
+								nY.add(tmpC);
 							}
-
-						}
-
+						} else break;
 					}
-					if (flag == true) {
-						flag2 = true;
-						break;
-					}
+
 				}
 
 			}
