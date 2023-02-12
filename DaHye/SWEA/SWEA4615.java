@@ -6,14 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-class Point {
-	int a;
-	int b;
-	Point(int a, int b){
-		this.a = a;
-		this.b = b;
-	}
-}
 public class SWEA4615 {
 
 	public static void main(String[] args) throws Exception {
