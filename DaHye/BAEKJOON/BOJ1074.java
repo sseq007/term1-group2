@@ -24,34 +24,14 @@ public class BOJ1074 {
 		r = Integer.parseInt(st.nextToken());
 		c = Integer.parseInt(st.nextToken());
 
-		arr = new int[(int) Math.pow(2, N)][(int) Math.pow(2, N)];
-		
-		func(0, 0, N, 0);
-//		func(4, 4, N - 1, 0);
-//		func(4, 0, N - 1, 0);
-//		func(4, 4, N - 1, 0);
-
-
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(Arrays.toString(arr[i]));
-		}
+		System.out.println(func(N, r, c));
 
 	}
 
-	static public void func(int startX, int startY, int N, int t) {
-		int total = (int) Math.pow(2, 2 *N);
-		int init = total / 4;
-		if(N == 0) return;
-		
-		if (startX == 0 && startY == 0)
-			arr[startX][startY] = 0;
-		arr[startX][startY + (int) Math.pow(2, N - 1)] = arr[startX][startY] + init;
-		arr[startX + (int) Math.pow(2, N - 1)][startY] = arr[startX][startY]  + 2 * init;
-		arr[startX + (int) Math.pow(2, N - 1)][startY + (int) Math.pow(2, N - 1)] = arr[startX][startY]  + 3 * init;
-		
-		total /= 4;
-		N -= 1;
-		
-		func(startX, startY, N, total);
+	static public int func(int N, int r, int c) {
+		if(N == 0) {
+			return 0;
+		}
+		return 2 * (r % 2) + (c % 2) + 4 * func(N - 1, (int) (r / 2), (int) (c / 2));
 	}
 }
