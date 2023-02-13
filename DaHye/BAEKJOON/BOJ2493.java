@@ -8,7 +8,10 @@ import java.util.StringTokenizer;
 
 public class BOJ2493 {
 	/*
-	 * 탑 입력 - N: 탑의 수 - 탑들의 높이가 직선상에 놓인 순서대로 출력 - 각각의 탑들에서 발사한 레이저 신호를 수신한 탑들의 번호
+	 * 탑 
+	 * 입력 
+	 * - N: 탑의 수 - 탑들의 높이가 직선상에 놓인 순서대로 출력 
+	 * - 각각의 탑들에서 발사한 레이저 신호를 수신한 탑들의 번호
 	 */
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
