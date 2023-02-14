@@ -80,6 +80,7 @@ public class BOJ1759 {
 		}
 		
 		// 6개 중에 중복되지 않고 순서대로 나열될 수 있도록
+		// 처음에 순열로 했다가 시간초과 → 조합
 		if (idx == ch.length) return;
 
 		sel[k] = ch[idx];
