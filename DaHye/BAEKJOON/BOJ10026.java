@@ -24,9 +24,8 @@ public class BOJ10026 {
 	static BufferedReader br;
 	static StringBuilder sb;
 	static int N;
-	static Character[][] arr;
-	static Character[][] copyArr; // 적록색약이 아닌 사람
-	static Character[][] copyArr2; // 적록색약인 사람
+	static char[][] arr;
+	static char[][] arr2; // 적록색약인 사람
 	static int count1; // 적록색약이 아닌 사람
 	static int count2; // 적록색약인 사람
 	
@@ -34,30 +33,27 @@ public class BOJ10026 {
 		br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		
-		arr = new Character[N][N];
-		copyArr = new Character[N][N];
-		copyArr2 = new Character[N][N];		
+		arr = new char[N][N];
+		arr2 = new char[N][N];
 		
 		for(int i = 0; i < arr.length; i++) {
 			String tmp = br.readLine();
 			for(int j = 0; j < arr[i].length; j++) {
 				arr[i][j] = tmp.charAt(j);
+				if(tmp.charAt(j) == 'R') arr2[i][j] = 'G';
+				else arr2[i][j] = tmp.charAt(j);
 			}
 		}
 		
-		// 입력 배열을 적록색약이 아닌 사람, 적록색약인 사람 구분해서 배열에 저장함
-		arrayCopy(arr, copyArr, copyArr2);
-		
-		// 적록색약이 아닌 사람
 		for (int i = 0; i < arr.length; i++) {
 			for (int j = 0; j < arr[i].length; j++) {
-				if(copyArr[i][j] == 'R' || copyArr[i][j] == 'G' || copyArr[i][j] == 'B') {
-					bfs(new Point(i, j), copyArr, copyArr[i][j]);
+				if(arr[i][j] == 'R' || arr[i][j] == 'G' || arr[i][j] == 'B') {
+					bfs(new Point(i, j), arr, arr[i][j]);
 					count1++;
 				}
 				
-				if(copyArr2[i][j] == 'G' || copyArr2[i][j] == 'B') {
-					bfs(new Point(i, j), copyArr2, copyArr2[i][j]);
+				if(arr2[i][j] == 'G' || arr2[i][j] == 'B') {
+					bfs(new Point(i, j), arr2, arr2[i][j]);
 					count2++;
 				}
 			}
@@ -69,7 +65,7 @@ public class BOJ10026 {
 	// 상, 하, 좌, 우
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
-	public static void bfs(Point p, Character[][] input, char c) {
+	public static void bfs(Point p, char[][] input, char c) {
 		Queue<Point> queue = new LinkedList<>();
 		
 		boolean[][] v = new boolean[N][N];
@@ -92,19 +88,4 @@ public class BOJ10026 {
 		}
 		
 	}
-	
-	public static void arrayCopy(Character[][] arr, Character[][] copy, Character[][] copy2) {
-		for(int i = 0; i < arr.length; i++) {
-			copy[i] = Arrays.copyOf(arr[i], arr[i].length);
-			for(int j = 0; j < arr[i].length; j++) {
-				if(copy[i][j] == 'R') {
-					copy2[i][j] = 'G';
-					continue;
-				} else {
-					copy2[i][j] = copy[i][j];
-				}
-			}
-		}
-	}
-	
 }
