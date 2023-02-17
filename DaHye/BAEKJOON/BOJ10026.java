@@ -21,20 +21,16 @@ public class BOJ10026 {
 			this.c = c;
 		}
 	}
-	static BufferedReader br;
-	static StringBuilder sb;
 	static int N;
-	static char[][] arr;
-	static char[][] arr2; // 적록색약인 사람
-	static int count1; // 적록색약이 아닌 사람
-	static int count2; // 적록색약인 사람
-	
 	public static void main(String[] args) throws Exception {
-		br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		
-		arr = new char[N][N];
-		arr2 = new char[N][N];
+		char[][] arr = new char[N][N];
+		char[][] arr2 = new char[N][N];
+		
+		int count1 = 0;
+		int count2 = 0;
 		
 		for(int i = 0; i < arr.length; i++) {
 			String tmp = br.readLine();
