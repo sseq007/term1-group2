@@ -1,5 +1,11 @@
 package BAEKJOON;
 
+/*
+ * 그림
+ * 그림의 총 개수, 넓이가 가장 넓은 것의 넓이
+ * n: 세로 길이, m: 가로 길이
+ */
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
