@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 /*
  * 파핑파핑 지뢰찾기
  */
-public class BOJ1868 {
+public class SWEA1868 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static int T, N;
 	static char[][] map;
