@@ -35,18 +35,6 @@ public class BOJ18222 {
 		return count;
 	}
 	
-	public static String flipStr(String x) {
-		String x2 = "";
-		for(int i = 0; i < x.length(); i++) {
-			if(x.charAt(i) == '1') {
-				x2 = x2 + "0";
-			} else if(x.charAt(i) == '0') {
-				x2 = x2 + "1";
-			}
-		}
-		return x2;
-	}
-	
 	public static long pow(int a, long b) {
 		long result = 1;
 		for(int i = 0; i < b; i++) {
