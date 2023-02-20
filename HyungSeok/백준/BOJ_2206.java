@@ -14,7 +14,6 @@ public class BOJ_2206 {
     static int[][] board;
     static ArrayList<Integer[][]> all_board;
     static boolean[][] visited;
-    static int wall_cnt;
     static int[] nx = {0, 1, 0, -1};
     static int[] ny = {-1, 0, 1, 0};
 
@@ -28,23 +27,32 @@ public class BOJ_2206 {
         board = new int[N][M];
         visited = new boolean[N][M];
         all_board = new ArrayList<>();
-        wall_cnt = 0;
 
         for (int i = 0 ; i < N ; i++) {
             String s = bf.readLine();
             for (int j = 0 ; j < M ; j++) {
                 board[i][j] = s.charAt(j) - '0';
-                if (board[i][j] == 1) {
-                    wall_cnt++;
-                }
             }
         }
 
-        int answer = bfs(0, 0);
+        find_AllBoard(0, new Point(), new boolean[N][M]);
 
-        System.out.println(answer);
+        int answer = Integer.MAX_VALUE;
 
+        for (int i = 0 ; i < all_board.size() ; i++) {
+            int tmp = bfs(all_board.get(i), 0, 0, new boolean[N][M]);
 
+            if (tmp != -1) {
+                answer = Math.min(answer, tmp);
+            }
+        }
+
+        if (answer == Integer.MAX_VALUE){
+            System.out.println(-1);
+        }
+        else {
+            System.out.println(answer);
+        }
     }
 
     private static void find_AllBoard(int idx, Point p, boolean[][] visited) {
@@ -78,7 +86,8 @@ public class BOJ_2206 {
         all_board.add(tmp_board);
     }
 
-    private static int bfs(int x, int y) {
+    private static int bfs(Integer[][] board, int x, int y, boolean[][] visited) {
+
         Queue<Point> Q = new LinkedList<>();
 
         Q.add(new Point(x, y, 1));
@@ -115,6 +124,8 @@ public class BOJ_2206 {
         int x;
         int y;
         int depth;
+
+        public Point(){}
 
         public Point(int x, int y, int depth) {
             this.x = x;
