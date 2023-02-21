@@ -10,23 +10,20 @@ import java.util.Scanner;
  * N번째 작은 줄어드는 수 출력
  */
 public class BOJ1174 {
-	static int[] arr = new int[7];
+	static int[] arr = new int[10];
 	static boolean[] v = new boolean[10];
 	static int N, total;
 	static StringBuilder sb = new StringBuilder();
 	
-	public static void main(String[] args) {
+	public static void main(String[] argzs) {
 		Scanner sc = new Scanner(System.in);
 		N = sc.nextInt();
-//		while(count < N) {
-//			for(int i)
-//		}
-		
-		for(int count = 1; count  < 8; count++) {
+
+		for(int count = 1; count < 11; count++) {
 			func(0, 10, count);			
 		}
 		
-		if(N > 967) {
+		if(N > 1023) {
 			sb.setLength(0);
 			sb.append(-1);
 		}
