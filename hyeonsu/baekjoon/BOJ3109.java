@@ -1,7 +1,6 @@
 package baekjoon;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class BOJ3109 {
@@ -11,7 +10,6 @@ public class BOJ3109 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     static int R, C;
-    static boolean flag;
     static int ans = 0;
     static char[][] map;
 
