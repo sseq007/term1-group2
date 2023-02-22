@@ -1,7 +1,7 @@
 package baekjoon;
 
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class BOJ6987 {
 
@@ -10,7 +10,7 @@ public class BOJ6987 {
     static StringTokenizer st;
 
     static Team[][] resultTable = new Team[4][6];
-    static int ans = 0;
+    static boolean[] isValidTable = new boolean[4];
 
     public static void main(String[] args) throws IOException {
         for (int i = 0; i < 4; i++) {
@@ -24,10 +24,13 @@ public class BOJ6987 {
         }
 
         //로직
+        Team[] tmpTeam = new Team[6];
+        for (int j = 0; j < 6; j++) {
+            tmpTeam[j] = new Team(0, 0, 0);
+        }
+        solve(tmpTeam, 0, 1, 0);
         for (int i = 0; i < 4; i++) {
-            ans = 0;
-            solve(i, 0);
-            bw.write(ans + " ");
+            bw.write(isValidTable[i] ? "1 " : "0 ");
         }
         bw.write("\n");
         bw.flush();
@@ -36,22 +39,40 @@ public class BOJ6987 {
 
     static int stoi(String s) {return Integer.parseInt(s);}
 
-    static void solve(int tableNum, int curTeam) {
-        if (curTeam == 6) {
-            ans = 1;
+    static void solve(Team[] table, int curTeam, int otherTeam, int matchCnt) {
+        if (matchCnt == 15) {
+            for (int i = 0; i < 4; i++) {
+                boolean flag = true;
+                for (int j = 0; j < 6; j++) {
+                    if (table[j].win != resultTable[i][j].win || table[j].draw != resultTable[i][j].draw || table[j].lose != resultTable[i][j].lose) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) isValidTable[i] = true;
+            }
             return;
         }
 
-        //현재 팀에 대해서 반대의 팀이 있어야 맞는 정보이다.
-        Team team = resultTable[tableNum][curTeam];
-        for (int i = 0; i < 6; i++) {
-            if (i == curTeam) continue;
-            Team otherTeam = resultTable[tableNum][i];
-            if (team.win == otherTeam.lose && team.lose == otherTeam.win && team.draw == otherTeam.draw) {
-                solve(tableNum, curTeam + 1);
-            }
-        }
-
+        //각각의 라운드에서 이기거나 비기거나 지는 경우의 수가 있다.
+        table[curTeam].win++;
+        table[otherTeam].lose++;
+        if (otherTeam == 5) solve(table, curTeam + 1, curTeam + 2, matchCnt + 1);
+        else solve(table, curTeam, otherTeam + 1, matchCnt + 1);
+        table[curTeam].win--;
+        table[otherTeam].lose--;
+        table[curTeam].draw++;
+        table[otherTeam].draw++;
+        if (otherTeam == 5) solve(table, curTeam + 1, curTeam + 2, matchCnt + 1);
+        else solve(table, curTeam, otherTeam + 1, matchCnt + 1);
+        table[curTeam].draw--;
+        table[otherTeam].draw--;
+        table[curTeam].lose++;
+        table[otherTeam].win++;
+        if (otherTeam == 5) solve(table, curTeam + 1, curTeam + 2, matchCnt + 1);
+        else solve(table, curTeam, otherTeam + 1, matchCnt + 1);
+        table[curTeam].lose--;
+        table[otherTeam].win--;
     }
 
     static class Team {
@@ -63,15 +84,6 @@ public class BOJ6987 {
             this.win = win;
             this.draw = draw;
             this.lose = lose;
-        }
-
-        @Override
-        public String toString() {
-            return "Team{" +
-                    "win=" + win +
-                    ", draw=" + draw +
-                    ", lose=" + lose +
-                    '}';
         }
     }
 }
