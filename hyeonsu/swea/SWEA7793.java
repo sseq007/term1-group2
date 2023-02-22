@@ -74,15 +74,13 @@ public class SWEA7793 {
                 v[nx][ny] = true;
                 //수연이가 여신님을 만나는 순간 종료한다.
                 if (cur instanceof Suyeon && map[nx][ny] == 'D') {
-                    Suyeon s = (Suyeon) cur;
-                    cnt = s.cnt + 1;
+                    cnt = ((Suyeon) cur).cnt + 1;
                     flag = true;
                     break;
                 }
 
                 if (cur instanceof Suyeon) {
-                    Suyeon s = (Suyeon) cur;
-                    q.add(new Suyeon(nx, ny, s.cnt + 1));
+                    q.add(new Suyeon(nx, ny, ((Suyeon) cur).cnt + 1));
                 } else {
                     map[nx][ny] = '*';
                     q.add(new Pair(nx, ny));
