@@ -1,12 +1,7 @@
 package baekjoon;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class BOJ20055 {
 
@@ -38,10 +33,6 @@ public class BOJ20055 {
             rotate();
             move();
             putOn();
-            for (int[] a : belt) {
-                System.out.println(Arrays.toString(a));
-            }
-            System.out.println(Arrays.toString(isRobotExist));
             if (canExit(countZero())) break;
             stage++;
         }
@@ -61,6 +52,7 @@ public class BOJ20055 {
         for (int i = n - 1; i > 0; i--) {
             belt[0][i] = belt[0][i - 1];
             isRobotExist[i] = isRobotExist[i - 1];
+            isRobotExist[i - 1] = false;
         }
         //하단 벨트
         for (int i = 0; i < n - 1; i++) {
