@@ -1,4 +1,4 @@
-package hw_d_7_20230210;
+package SWEA;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
